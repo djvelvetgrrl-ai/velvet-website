@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Velvet Music Mixes — Start Your Booking</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+  :root{
+    --ink:#0a0a0a;
+    --crimson:#e01020;
+    --crimson-bright:#ff2d3f;
+    --azure:#16a4d6;
+    --azure-bright:#3fc2f0;
+    --gold:#e01020;
+    --ivory:#f7f7f7;
+    --card:#151515;
+  }
+
+  *{box-sizing:border-box;}
+
+  body{
+    margin:0;
+    min-height:100vh;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(224,16,32,0.18), transparent 60%),
+      var(--ink);
+    font-family:'Manrope', sans-serif;
+    color:var(--ivory);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:32px 16px;
+  }
+
+  .stage{
+    width:100%;
+    max-width:520px;
+  }
+
+  .wordmark{
+    text-align:center;
+    margin-bottom:6px;
+  }
+  .wordmark h1{
+    font-family:'Syne', sans-serif;
+    font-weight:800;
+    font-size:clamp(34px, 7vw, 46px);
+    letter-spacing:0.5px;
+    margin:0;
+    line-height:0.95;
+    background:linear-gradient(180deg, #fff 0%, var(--gold) 120%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .wordmark p{
+    margin:6px 0 0;
+    font-size:13px;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:500;
+  }
+
+  .card{
+    margin-top:28px;
+    background:var(--card);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:18px;
+    padding:28px 24px 30px;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.6);
+  }
+
+  .prompt{
+    font-size:15px;
+    color:rgba(247,247,247,0.75);
+    margin:0 0 18px;
+  }
+  .prompt strong{ color:var(--ivory); }
+
+  /* Planner checkbox */
+  .planner-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px 16px;
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:12px;
+    margin-bottom:22px;
+    cursor:pointer;
+    transition:border-color 0.2s ease, background 0.2s ease;
+  }
+  .planner-row:hover{ border-color:rgba(22,164,214,0.5); }
+  .planner-row.checked{
+    border-color:var(--azure);
+    background:rgba(22,164,214,0.08);
+  }
+
+  .checkbox{
+    flex:none;
+    width:22px;
+    height:22px;
+    border-radius:6px;
+    border:2px solid rgba(247,247,247,0.4);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:all 0.2s ease;
+  }
+  .planner-row.checked .checkbox{
+    background:var(--azure);
+    border-color:var(--azure);
+  }
+  .checkbox svg{
+    width:13px;height:13px;
+    opacity:0;
+    transform:scale(0.6);
+    transition:all 0.15s ease;
+  }
+  .planner-row.checked .checkbox svg{ opacity:1; transform:scale(1); }
+
+  .planner-label{
+    font-size:14.5px;
+    line-height:1.4;
+  }
+  .planner-label .sub{
+    display:block;
+    font-size:12.5px;
+    color:rgba(247,247,247,0.5);
+    margin-top:2px;
+  }
+
+  .planner-followup{
+    max-height:0;
+    overflow:hidden;
+    opacity:0;
+    transition:max-height 0.3s ease, opacity 0.3s ease, margin 0.3s ease;
+  }
+  .planner-row.checked + .planner-followup{
+    max-height:120px;
+    opacity:1;
+    margin:-10px 0 22px;
+  }
+  .planner-followup-inner{
+    padding:12px 16px;
+    border-left:2px solid var(--gold);
+    font-size:13px;
+    color:rgba(247,247,247,0.65);
+  }
+
+  /* Event type grid */
+  .grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+  @media (min-width:420px){
+    .grid{ grid-template-columns:1fr 1fr 1fr; }
+  }
+
+  .etype{
+    position:relative;
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:11px;
+    color:var(--ivory);
+    font-family:'Manrope', sans-serif;
+    font-weight:500;
+    font-size:13.5px;
+    line-height:1.25;
+    padding:16px 10px;
+    text-align:center;
+    cursor:pointer;
+    overflow:hidden;
+    transition:border-color 0.2s ease, transform 0.15s ease, background 0.2s ease;
+  }
+  .etype:hover{
+    transform:translateY(-2px);
+    border-color:rgba(224,16,32,0.6);
+  }
+  .etype.selected{
+    border-color:var(--gold);
+    background:linear-gradient(180deg, rgba(224,16,32,0.16), rgba(22,164,214,0.18));
+  }
+  .etype .glow{
+    position:absolute;
+    inset:-40%;
+    background:radial-gradient(circle, rgba(224,16,32,0.55), transparent 65%);
+    opacity:0;
+    transition:opacity 0.25s ease;
+    pointer-events:none;
+  }
+  .etype.selected .glow{ opacity:1; }
+  .etype span{ position:relative; z-index:1; }
+
+  .footer-note{
+    margin-top:24px;
+    text-align:center;
+    font-size:12px;
+    color:rgba(247,247,247,0.4);
+    letter-spacing:0.3px;
+  }
+
+  /* Progress dots */
+  .progress{
+    display:flex;
+    justify-content:center;
+    gap:7px;
+    margin-bottom:18px;
+  }
+  .progress .dot{
+    width:7px;height:7px;border-radius:50%;
+    background:rgba(247,247,247,0.18);
+    transition:all 0.25s ease;
+  }
+  .progress .dot.active{ background:var(--azure); width:20px; border-radius:4px; }
+  .progress .dot.done{ background:rgba(224,16,32,0.5); }
+
+  .screen{ display:none; }
+  .screen.active{ display:block; }
+
+  .field{ margin-bottom:16px; }
+  .field label{
+    display:block;
+    font-size:12.5px;
+    font-weight:600;
+    letter-spacing:0.3px;
+    color:rgba(247,247,247,0.85);
+    margin-bottom:6px;
+  }
+  .field label .opt{
+    font-weight:400;
+    color:rgba(247,247,247,0.4);
+    text-transform:none;
+    letter-spacing:0;
+  }
+  .field input[type="text"],
+  .field input[type="email"],
+  .field input[type="tel"],
+  .field input[type="date"],
+  .field input[type="number"],
+  .field select,
+  .field textarea{
+    width:100%;
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.14);
+    border-radius:9px;
+    padding:11px 12px;
+    color:var(--ivory);
+    font-family:'Manrope', sans-serif;
+    font-size:14px;
+    transition:border-color 0.2s ease;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline:none; border-color:var(--gold);
+  }
+  .field textarea{ resize:vertical; min-height:64px; }
+  .row2{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  @media (max-width:420px){ .row2{ grid-template-columns:1fr; } }
+
+  .chiprow{ display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; }
+  .chip{
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.14);
+    border-radius:20px;
+    padding:8px 14px;
+    font-size:13px;
+    cursor:pointer;
+    transition:all 0.2s ease;
+    user-select:none;
+  }
+  .chip:hover{ border-color:rgba(224,16,32,0.5); }
+  .chip.selected{
+    border-color:var(--gold);
+    background:rgba(224,16,32,0.14);
+    color:var(--gold);
+  }
+
+  .navbar{ display:flex; align-items:center; gap:12px; margin-top:26px; }
+  .navbar .spacer{ flex:1; }
+  .btn{
+    font-family:'Manrope', sans-serif;
+    font-weight:600;
+    font-size:14px;
+    padding:12px 22px;
+    border-radius:24px;
+    border:none;
+    cursor:pointer;
+    transition:filter 0.15s ease, transform 0.15s ease;
+  }
+  .btn:hover{ transform:translateY(-1px); }
+  .btn-primary{ background:var(--gold); color:#151515; }
+  .btn-primary:hover{ filter:brightness(1.08); }
+  .btn-back{ background:transparent; color:rgba(247,247,247,0.6); }
+  .btn-back:hover{ color:var(--ivory); }
+
+  .section-title{
+    font-family:'Syne', sans-serif;
+    font-weight:700;
+    font-size:20px;
+    color:var(--gold);
+    margin:0 0 4px;
+  }
+  .section-sub{
+    font-size:13px;
+    color:rgba(247,247,247,0.55);
+    margin:0 0 20px;
+  }
+
+  .reviewblock{
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:12px;
+    padding:16px 18px;
+    margin-bottom:14px;
+  }
+  .reviewblock h4{
+    font-family:'Syne', sans-serif;
+    font-size:14px;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin:0 0 8px;
+  }
+  .reviewblock p{ margin:0 0 4px; font-size:13.5px; color:rgba(247,247,247,0.8); }
+  .reviewblock p b{ color:var(--ivory); }
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <div class="wordmark">
+    <h1>DJ Velvet Grrl</h1>
+    <p>Velvet Music Mixes</p>
+  </div>
+
+  <div class="card">
+
+    <div class="progress" id="progress">
+      <div class="dot active" data-step="0"></div>
+      <div class="dot" data-step="1"></div>
+      <div class="dot" data-step="2"></div>
+      <div class="dot" data-step="3"></div>
+      <div class="dot" data-step="4"></div>
+    </div>
+
+    <!-- SCREEN 0: Who + event type -->
+    <div class="screen active" data-screen="0">
+      <p class="prompt">Let's get your event booked. <strong>First, tell us a bit about it.</strong></p>
+
+      <div class="planner-row" id="plannerRow">
+        <div class="checkbox">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#151515" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <div class="planner-label">
+          I'm booking this on behalf of someone else
+          <span class="sub">Event planners — check this first</span>
+        </div>
+      </div>
+      <div class="planner-followup">
+        <div class="planner-followup-inner">
+          Got it — we'll grab your contact info for logistics, then the end client's details for music &amp; moments.
+        </div>
+      </div>
+
+      <div class="grid" id="eventGrid">
+        <button class="etype" data-type="Wedding"><span class="glow"></span><span>Wedding</span></button>
+        <button class="etype" data-type="Corporate"><span class="glow"></span><span>Corporate Event</span></button>
+        <button class="etype" data-type="Milestone Birthday"><span class="glow"></span><span>Milestone Birthday</span></button>
+        <button class="etype" data-type="School Event"><span class="glow"></span><span>School Event</span></button>
+        <button class="etype" data-type="Private Party"><span class="glow"></span><span>Private Party</span></button>
+        <button class="etype" data-type="Community/Nonprofit"><span class="glow"></span><span>Community / Nonprofit</span></button>
+        <button class="etype" data-type="Bar/Nightclub"><span class="glow"></span><span>Bar / Nightclub</span></button>
+        <button class="etype" data-type="Sporting/Brand"><span class="glow"></span><span>Sporting / Brand</span></button>
+        <button class="etype" data-type="Something Else"><span class="glow"></span><span>Something Else</span></button>
+      </div>
+
+      <div id="plannerNames" style="display:none;">
+        <div class="row2" style="margin-top:18px;">
+          <div class="field"><label>Your name (planner)</label><input type="text" id="p_plannerName"></div>
+          <div class="field"><label>End client's name</label><input type="text" id="p_clientName"></div>
+        </div>
+        <div class="field"><label>Relationship to event <span class="opt">(couple, honoree, company...)</span></label><input type="text" id="p_relationship"></div>
+      </div>
+
+      <div class="navbar">
+        <div class="spacer"></div>
+        <button class="btn btn-primary" id="toStep1">Continue</button>
+      </div>
+    </div>
+
+    <!-- SCREEN 1: Event basics -->
+    <div class="screen" data-screen="1">
+      <p class="section-title">Event Basics</p>
+      <p class="section-sub">Who to reach, and when &amp; where it's happening.</p>
+
+      <div class="row2">
+        <div class="field"><label>Your name</label><input type="text" id="i_name"></div>
+        <div class="field"><label>Email</label><input type="email" id="i_email"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label>Phone <span class="opt">(optional)</span></label><input type="tel" id="i_phone"></div>
+        <div class="field"><label>Organization <span class="opt">(if any)</span></label><input type="text" id="i_org"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label>Event date</label><input type="date" id="i_date"></div>
+        <div class="field"><label>Start / end time <span class="opt">(if known)</span></label><input type="text" id="i_times" placeholder="e.g. 6pm – 11pm"></div>
+      </div>
+      <div class="field"><label>Venue name &amp; address <span class="opt">(if known)</span></label><input type="text" id="i_venue"></div>
+      <div class="row2">
+        <div class="field"><label>Guest count &amp; age range</label><input type="text" id="i_guests" placeholder="e.g. 120, mixed ages"></div>
+        <div class="field"><label>Indoor / outdoor / power</label><input type="text" id="i_setting" placeholder="e.g. outdoor, covered, outlet nearby"></div>
+      </div>
+
+      <div class="navbar">
+        <button class="btn btn-back" data-back="0">Back</button>
+        <div class="spacer"></div>
+        <button class="btn btn-primary" id="toStep2">Continue</button>
+      </div>
+    </div>
+
+    <!-- SCREEN 2: Music & vibe -->
+    <div class="screen" data-screen="2">
+      <p class="section-title">Music &amp; Vibe</p>
+      <p class="section-sub">This is what shapes the whole night — be as specific as you'd like.</p>
+
+      <div class="field"><label>Overall vibe, in a few words</label><input type="text" id="i_vibe" placeholder="e.g. classy but fun, high-energy dance party"></div>
+      <div class="field"><label>Genres you love / want featured</label><input type="text" id="i_genres"></div>
+      <div class="field"><label>Must-play songs</label><textarea id="i_must" placeholder="Artist – Title, one per line"></textarea></div>
+      <div class="field"><label>Do-not-play songs or genres</label><textarea id="i_donot"></textarea></div>
+      <div class="row2">
+        <div class="field"><label>Clean versions required?</label>
+          <select id="i_clean">
+            <option>Not sure</option><option>Yes, all ages</option><option>No, adults only</option>
+          </select>
+        </div>
+        <div class="field"><label>Cultural / specific music <span class="opt">(optional)</span></label><input type="text" id="i_culture" placeholder="e.g. hora set, quinceañera"></div>
+      </div>
+
+      <div class="navbar">
+        <button class="btn btn-back" data-back="1">Back</button>
+        <div class="spacer"></div>
+        <button class="btn btn-primary" id="toStep3">Continue</button>
+      </div>
+    </div>
+
+    <!-- SCREEN 3: Key moments & logistics -->
+    <div class="screen" data-screen="3">
+      <p class="section-title">Key Moments &amp; Logistics</p>
+      <p class="section-sub">Tap what applies — add details below if you'd like.</p>
+
+      <div class="field">
+        <label>Special sequences</label>
+        <div class="chiprow" id="momentChips">
+          <div class="chip" data-val="Grand entrance">Grand entrance</div>
+          <div class="chip" data-val="First dance">First dance</div>
+          <div class="chip" data-val="Toasts / speeches">Toasts / speeches</div>
+          <div class="chip" data-val="Cake cutting">Cake cutting</div>
+          <div class="chip" data-val="Dedications">Dedications</div>
+          <div class="chip" data-val="Send-off">Send-off</div>
+        </div>
+      </div>
+      <div class="field"><label>Details on any of the above <span class="opt">(optional)</span></label><textarea id="i_moments" placeholder="Specific songs or timing"></textarea></div>
+      <div class="row2">
+        <div class="field"><label>Who's making announcements?</label>
+          <select id="i_mc"><option>DJ Velvet Grrl</option><option>Separate MC/host</option><option>Not sure yet</option></select>
+        </div>
+        <div class="field"><label>Add-ons interested in?</label>
+          <select id="i_addons"><option>Not sure yet</option><option>Photo booth</option><option>Uplighting</option><option>None needed</option></select>
+        </div>
+      </div>
+      <div class="field"><label>Load-in time &amp; access notes <span class="opt">(stairs, elevator, parking)</span></label><input type="text" id="i_loadin"></div>
+      <div class="field"><label>Anything else she should know</label><textarea id="i_notes"></textarea></div>
+
+      <div class="navbar">
+        <button class="btn btn-back" data-back="2">Back</button>
+        <div class="spacer"></div>
+        <button class="btn btn-primary" id="toStep4">Review</button>
+      </div>
+    </div>
+
+    <!-- SCREEN 4: Review & submit -->
+    <div class="screen" data-screen="4">
+      <p class="section-title">Review &amp; Send</p>
+      <p class="section-sub">One check, then it goes straight to her inbox.</p>
+
+      <div id="reviewOutput"></div>
+
+      <div class="navbar">
+        <button class="btn btn-back" data-back="3">Back</button>
+        <div class="spacer"></div>
+        <button class="btn btn-primary" id="sendBtn">Send My Details</button>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="footer-note">Takes about 2 minutes · No account needed</p>
+</div>
+
+<script>
+  // ---- Step 0 interactions ----
+  const plannerRow = document.getElementById('plannerRow');
+  const plannerNames = document.getElementById('plannerNames');
+  plannerRow.addEventListener('click', () => {
+    plannerRow.classList.toggle('checked');
+    plannerNames.style.display = plannerRow.classList.contains('checked') ? 'block' : 'none';
+  });
+
+  let selectedType = '';
+  const typeButtons = document.querySelectorAll('.etype');
+  typeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      typeButtons.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      selectedType = btn.dataset.type;
+    });
+  });
+
+  // ---- Moment chips (multi-select) ----
+  const momentChips = document.querySelectorAll('#momentChips .chip');
+  momentChips.forEach(chip => {
+    chip.addEventListener('click', () => chip.classList.toggle('selected'));
+  });
+
+  // ---- Screen navigation ----
+  const screens = document.querySelectorAll('.screen');
+  const dots = document.querySelectorAll('.progress .dot');
+
+  function goTo(stepIndex){
+    screens.forEach(s => s.classList.toggle('active', +s.dataset.screen === stepIndex));
+    dots.forEach((d,i) => {
+      d.classList.toggle('active', i === stepIndex);
+      d.classList.toggle('done', i < stepIndex);
+    });
+    if(stepIndex === 4) buildReview();
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  document.getElementById('toStep1').addEventListener('click', () => {
+    if(!selectedType){ alert('Pick an event type to continue.'); return; }
+    goTo(1);
+  });
+  document.getElementById('toStep2').addEventListener('click', () => goTo(2));
+  document.getElementById('toStep3').addEventListener('click', () => goTo(3));
+  document.getElementById('toStep4').addEventListener('click', () => goTo(4));
+  document.querySelectorAll('[data-back]').forEach(b => {
+    b.addEventListener('click', () => goTo(+b.dataset.back));
+  });
+
+  // ---- Review + submit ----
+  const v = id => (document.getElementById(id)?.value || '').trim();
+
+  function buildReview(){
+    const isPlanner = plannerRow.classList.contains('checked');
+    const moments = Array.from(document.querySelectorAll('#momentChips .chip.selected')).map(c => c.dataset.val).join(', ') || 'None specified';
+
+    document.getElementById('reviewOutput').innerHTML = `
+      <div class="reviewblock">
+        <h4>Event</h4>
+        <p><b>${selectedType || '—'}</b>${isPlanner ? ' · booked by a planner' : ''}</p>
+        ${isPlanner ? `<p>Planner: <b>${v('p_plannerName') || '—'}</b> · Client: <b>${v('p_clientName') || '—'}</b> (${v('p_relationship') || '—'})</p>` : ''}
+      </div>
+      <div class="reviewblock">
+        <h4>Basics</h4>
+        <p>${v('i_name') || '—'} · ${v('i_email') || '—'} · ${v('i_phone') || 'no phone'}</p>
+        <p>${v('i_date') || 'date TBD'} · ${v('i_times') || 'time TBD'}</p>
+        <p>${v('i_venue') || 'venue TBD'}</p>
+        <p>${v('i_guests') || '—'} · ${v('i_setting') || '—'}</p>
+      </div>
+      <div class="reviewblock">
+        <h4>Music</h4>
+        <p>Vibe: <b>${v('i_vibe') || '—'}</b></p>
+        <p>Genres: ${v('i_genres') || '—'}</p>
+      </div>
+      <div class="reviewblock">
+        <h4>Moments &amp; Logistics</h4>
+        <p>${moments}</p>
+        <p>Load-in: ${v('i_loadin') || '—'}</p>
+      </div>
+    `;
+  }
+
+  document.getElementById('sendBtn').addEventListener('click', () => {
+    const isPlanner = plannerRow.classList.contains('checked');
+    const moments = Array.from(document.querySelectorAll('#momentChips .chip.selected')).map(c => c.dataset.val).join(', ') || 'None specified';
+
+    const lines = [
+      `Event type: ${selectedType || '—'}`,
+      isPlanner ? `Booked by planner: ${v('p_plannerName')} (on behalf of ${v('p_clientName')}, ${v('p_relationship')})` : '',
+      '',
+      `Name: ${v('i_name')}`,
+      `Email: ${v('i_email')}`,
+      `Phone: ${v('i_phone') || '—'}`,
+      `Organization: ${v('i_org') || '—'}`,
+      `Event date: ${v('i_date') || 'TBD'}`,
+      `Start / end time: ${v('i_times') || '—'}`,
+      `Venue: ${v('i_venue') || 'TBD'}`,
+      `Guest count / ages: ${v('i_guests') || '—'}`,
+      `Setting: ${v('i_setting') || '—'}`,
+      '',
+      `Vibe: ${v('i_vibe') || '—'}`,
+      `Genres: ${v('i_genres') || '—'}`,
+      `Must-play: ${v('i_must') || '—'}`,
+      `Do-not-play: ${v('i_donot') || '—'}`,
+      `Clean versions: ${v('i_clean')}`,
+      `Cultural / specific music: ${v('i_culture') || '—'}`,
+      '',
+      `Key moments: ${moments}`,
+      `Moment details: ${v('i_moments') || '—'}`,
+      `Announcements by: ${v('i_mc')}`,
+      `Add-ons: ${v('i_addons')}`,
+      `Load-in / access: ${v('i_loadin') || '—'}`,
+      `Other notes: ${v('i_notes') || '—'}`,
+    ].filter(Boolean).join('\n');
+
+    const subject = `New booking inquiry — ${selectedType}${v('i_date') ? ' — '+v('i_date') : ''} — ${v('i_name') || v('p_clientName') || 'Unnamed'}`;
+    window.location.href = `mailto:book@djvelvetgrrl.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines)}`;
+  });
+</script>
+
+</body>
+</html>
