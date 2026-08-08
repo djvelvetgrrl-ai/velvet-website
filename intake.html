@@ -335,6 +335,12 @@
   }
   .reviewblock p{ margin:0 0 4px; font-size:13.5px; color:rgba(247,247,247,0.8); }
   .reviewblock p b{ color:var(--ivory); }
+
+  .pricenote{
+    font-size:12px;
+    color:rgba(247,247,247,0.45);
+    line-height:1.5;
+  }
 </style>
 </head>
 <body>
@@ -391,6 +397,10 @@
         <button class="etype" data-type="Something Else"><span class="glow"></span><span>Something Else</span></button>
         <button class="etype" data-type="Wedding"><span class="glow"></span><span>Wedding</span></button>
       </div>
+
+      <p class="pricenote" style="margin-top:14px;">
+        Booking a single hour (B2B lunches, short programs)? That's a flat $350, with about an hour needed beforehand for DJ setup.
+      </p>
 
       <div id="plannerNames" style="display:none;">
         <div class="row2" style="margin-top:18px;">
@@ -486,6 +496,9 @@
           <select id="i_addons"><option>Not sure yet</option><option>Photo booth</option><option>Uplighting</option><option>Karaoke</option><option>Silent Disco</option><option>MC / hosting services</option><option>None needed</option></select>
         </div>
       </div>
+      <p class="pricenote" style="margin:-8px 0 16px;">
+        Photo booth add-on is +$150 (digital photos, no prints) and needs 30 minutes of its own for setup.
+      </p>
       <div class="field"><label>Load-in time &amp; access notes <span class="opt">(stairs, elevator, parking)</span></label><input type="text" id="i_loadin"></div>
       <div class="field"><label>Anything else she should know</label><textarea id="i_notes"></textarea></div>
 
