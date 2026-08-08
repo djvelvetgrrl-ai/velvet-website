@@ -36,58 +36,66 @@
   .btn-ghost:hover{border-color:var(--azure);color:var(--azure);}
   :focus-visible{outline:3px solid var(--azure);outline-offset:3px;}
 
-  /* ---------- Header ---------- */
-  header.site{position:sticky;top:0;z-index:50;background:rgba(11,10,13,.86);backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line);}
-  .navrow{max-width:1120px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:16px;}
-  .mark{width:44px;height:44px;flex:none;border-radius:50%;overflow:hidden;border:2px solid var(--crimson);
-    box-shadow:0 0 0 3px rgba(39,182,232,.18);}
-  .mark img{width:100%;height:100%;object-fit:cover;}
-  .brandblock{display:flex;flex-direction:column;line-height:1.1;margin-right:auto;}
-  .brandname{font-family:"Cinzel",serif;font-weight:800;font-size:17px;letter-spacing:.03em;color:var(--ivory);white-space:nowrap;}
-  .brandtag{font-family:"Lobster",cursive;color:var(--crimson);font-size:12px;margin-top:1px;}
-  nav.links{display:flex;gap:22px;font-size:13.5px;font-weight:600;}
+  /* ---------- Header: slim, functional, quiet on purpose ---------- */
+  header.site{position:sticky;top:0;z-index:50;background:transparent;
+    border-bottom:1px solid transparent; transition:background .25s ease, border-color .25s ease, backdrop-filter .25s ease;}
+  header.site.solid{background:rgba(11,10,13,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .navrow{max-width:1120px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:14px;}
+  .navmark{width:34px;height:34px;flex:none;border-radius:50%;overflow:hidden;border:2px solid var(--crimson);}
+  .navmark img{width:100%;height:100%;object-fit:cover;}
+  .navname{font-family:"Cinzel",serif;font-weight:700;font-size:14px;letter-spacing:.03em;color:var(--mauve);
+    white-space:nowrap;margin-right:auto;transition:color .2s;}
+  header.site.solid .navname{color:var(--ivory);}
+  nav.links{display:none;gap:22px;font-size:13.5px;font-weight:600;}
   nav.links a{text-decoration:none;color:var(--mauve);transition:color .15s;}
   nav.links a:hover{color:var(--ivory);}
+  @media(min-width:760px){nav.links{display:flex;align-items:center;}}
   .navcta{display:none;}
-  @media(min-width:760px){.navcta{display:inline-flex;}}
-  .navlinks-wrap{display:none;}
-  @media(min-width:760px){.navlinks-wrap{display:flex;align-items:center;gap:22px;}}
-  .hamburger{display:flex;margin-left:auto;background:none;border:1px solid var(--line);border-radius:8px;color:var(--ivory);padding:8px 10px;font-size:13px;font-weight:700;}
-  @media(min-width:760px){.hamburger{display:none;}}
+  @media(min-width:760px){.navcta{display:inline-flex;padding:10px 20px;font-size:12.5px;}}
+  .navcta.mobile{display:inline-flex;padding:9px 16px;font-size:12px;}
+  @media(min-width:760px){.navcta.mobile{display:none;}}
 
-  /* ---------- Hero ---------- */
-  .hero{position:relative;padding:76px 0 90px;overflow:hidden;}
-  .hero::before{content:"";position:absolute;inset:-20% -10% auto -10%;height:640px;
-    background:radial-gradient(closest-side, rgba(213,31,56,.28), transparent 70%),
-               radial-gradient(closest-side at 70% 30%, rgba(39,182,232,.20), transparent 65%);
-    filter:blur(10px); z-index:0;}
-  .herogrid{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;}
-  @media(max-width:860px){.herogrid{grid-template-columns:1fr;}}
-  .hero h1{font-size:clamp(34px,5.6vw,58px);line-height:1.04;}
-  .hero h1 em{font-style:normal;color:var(--crimson);display:block;}
-  .hero p.lede{color:var(--mauve);font-size:17px;max-width:46ch;margin:22px 0 30px;}
-  .hero .ctas{display:flex;gap:14px;flex-wrap:wrap;}
+  /* ---------- Hero: the one loud moment ---------- */
+  .hero{position:relative;padding:64px 0 84px;overflow:hidden;}
+  .hero::before{content:"";position:absolute;inset:-25% -10% auto -10%;height:720px;
+    background:radial-gradient(closest-side, rgba(213,31,56,.30), transparent 68%),
+               radial-gradient(closest-side at 75% 20%, rgba(39,182,232,.22), transparent 62%);
+    filter:blur(14px); z-index:0;}
+  .hero::after{content:"";position:absolute;inset:0;z-index:0;opacity:.5;
+    background:repeating-radial-gradient(circle at 82% 18%, transparent 0 26px, rgba(255,255,255,.02) 27px 28px);}
+  .herowrap{position:relative;z-index:1;}
 
-  .discwrap{position:relative;width:min(380px,80vw);aspect-ratio:1/1;margin:0 auto;}
-  .disc{position:absolute;inset:0;border-radius:50%;
-    background:
-      repeating-radial-gradient(circle at center, #100c11 0 2px, #17111a 2px 4px);
-    box-shadow:0 30px 70px rgba(0,0,0,.55), inset 0 0 0 10px #0c090d;
-    animation:spin 9s linear infinite;}
+  .brandzone{position:relative;text-align:center;padding:10px 0 6px;}
+  .discbehind{position:absolute;left:50%;top:6%;width:min(360px,72vw);aspect-ratio:1/1;
+    transform:translateX(-50%);z-index:0;opacity:.9;}
+  .discbehind .disc{position:absolute;inset:0;border-radius:50%;
+    background:repeating-radial-gradient(circle at center, #100c11 0 2px, #17111a 2px 4px);
+    box-shadow:0 30px 70px rgba(0,0,0,.5), inset 0 0 0 10px #0c090d;
+    animation:spin 10s linear infinite;}
   @keyframes spin{to{transform:rotate(360deg);}}
-  .disc .ring{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.05);}
-  .disc .ring.r1{inset:8%;} .disc .ring.r2{inset:20%;} .disc .ring.r3{inset:32%;}
-  .disclabel{position:absolute;inset:36%;border-radius:50%;overflow:hidden;
-    box-shadow:0 0 0 6px var(--void), 0 0 0 8px var(--crimson);}
-  .disclabel img{width:100%;height:100%;object-fit:cover;}
-  .discglow{position:absolute;inset:-6%;border-radius:50%;
-    background:radial-gradient(closest-side, rgba(39,182,232,.22), transparent 70%);
-    animation:pulse 3.4s ease-in-out infinite;}
-  @keyframes pulse{0%,100%{opacity:.55;}50%{opacity:1;}}
-  .tonearm{position:absolute;top:-6%;right:2%;width:34%;height:60%;
-    border-top:6px solid var(--mauve-dim);border-right:6px solid var(--mauve-dim);
-    border-top-right-radius:60px; opacity:.5; transform-origin:top right;}
+  .discbehind .ring{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.05);}
+  .discbehind .ring.r1{inset:10%;} .discbehind .ring.r2{inset:22%;} .discbehind .ring.r3{inset:34%;}
+  .discbehind .disclabel{position:absolute;inset:38%;border-radius:50%;overflow:hidden;
+    box-shadow:0 0 0 5px var(--void), 0 0 0 7px var(--crimson);}
+  .discbehind .disclabel img{width:100%;height:100%;object-fit:cover;}
+
+  .eyebrow.hero-eyebrow{position:relative;z-index:2;text-align:center;}
+
+  .wordmark{position:relative;z-index:2;font-family:"Cinzel",serif;font-weight:900;text-transform:uppercase;
+    font-size:clamp(32px,10.5vw,104px);line-height:.94;letter-spacing:.005em;color:var(--ivory);
+    transform:skewX(-7deg);white-space:nowrap;
+    text-shadow:3px 3px 0 var(--azure),-1px -1px 0 rgba(0,0,0,.4),7px 7px 0 rgba(0,0,0,.35);
+    margin-top:8px;}
+  .wordmark .rk{color:var(--crimson);}
+
+  .herotag{position:relative;z-index:2;font-family:"Lobster",cursive;color:var(--crimson);
+    font-size:clamp(18px,3.4vw,30px);margin-top:6px;text-shadow:0 2px 0 rgba(0,0,0,.3);}
+
+  .herosub{max-width:640px;margin:44px auto 0;text-align:center;}
+  .herosub h2{font-size:clamp(24px,4vw,40px);line-height:1.12;}
+  .herosub h2 em{font-style:normal;color:var(--crimson);}
+  .herosub p.lede{color:var(--mauve);font-size:16.5px;max-width:50ch;margin:18px auto 30px;}
+  .hero .ctas{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;}
 
   /* ---------- Ticker ---------- */
   .ticker-outer{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
@@ -175,8 +183,8 @@
   /* ---------- Footer ---------- */
   footer{padding:44px 0 60px;border-top:1px solid var(--line);}
   .footgrid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;align-items:flex-start;}
-  .footbrand .brandname{font-size:19px;}
-  .footbrand .brandtag{font-size:14px;margin-top:4px;}
+  .footbrand .fbname{font-family:"Cinzel",serif;font-weight:800;font-size:19px;}
+  .footbrand .fbtag{font-family:"Lobster",cursive;color:var(--crimson);font-size:14px;margin-top:4px;}
   .footlinks{display:flex;gap:18px;font-size:13px;color:var(--mauve);flex-wrap:wrap;}
   .footlinks a{text-decoration:none;}
   .footlinks a:hover{color:var(--ivory);}
@@ -185,47 +193,46 @@
 </head>
 <body>
 
-<header class="site">
+<header class="site" id="siteHeader">
   <div class="navrow">
-    <div class="mark"><img src="images/logo.jpg" alt="DJ Velvet Grrl logo"></div>
-    <div class="brandblock">
-      <div class="brandname">DJ Velvet Grrl</div>
-      <div class="brandtag">Velvet Music Mixes</div>
-    </div>
-    <div class="navlinks-wrap">
-      <nav class="links">
-        <a href="#services">Services</a>
-        <a href="#about">About</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <a class="btn btn-solid navcta" href="#contact">Start Your Quote</a>
-    </div>
-    <a class="hamburger" href="#contact">Quote</a>
+    <div class="navmark"><img src="images/logo.jpg" alt="DJ Velvet Grrl logo"></div>
+    <div class="navname">DJ Velvet Grrl</div>
+    <nav class="links">
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn btn-solid navcta" href="#contact">Start Your Quote</a>
+    <a class="btn btn-solid navcta mobile" href="#contact">Quote</a>
   </div>
 </header>
 
 <main>
 
-  <!-- ---------- HERO ---------- -->
+  <!-- ---------- HERO: the wordmark gets its one loud moment ---------- -->
   <section class="hero">
-    <div class="wrap herogrid">
-      <div>
-        <div class="eyebrow">Portland Metro · Mobile DJ &amp; MC</div>
-        <h1>Music built live,<br><em>for the room you actually have.</em></h1>
+    <div class="wrap herowrap">
+
+      <div class="brandzone">
+        <div class="discbehind" aria-hidden="true">
+          <div class="disc"><div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div></div>
+          <div class="disclabel"><img src="images/logo.jpg" alt=""></div>
+        </div>
+        <div class="eyebrow hero-eyebrow">Portland Metro · Mobile DJ &amp; MC</div>
+        <h1 class="wordmark">DJ Velvet G<span class="rk">rr</span>l</h1>
+        <div class="herotag">Velvet Music Mixes</div>
+      </div>
+
+      <div class="herosub">
+        <h2>Music and memories,<br><em>mixed live</em>.</h2>
         <p class="lede">DJ Velvet Grrl reads the crowd and blends the mix in real time, from the first guest through the last song, so nothing drags and nothing feels canned. Corporate events, fundraisers, milestones, and celebrations of every kind.</p>
         <div class="ctas">
           <a class="btn btn-solid" href="#contact">Press Play — Get a Quote</a>
           <a class="btn btn-ghost" href="#services">See services</a>
         </div>
       </div>
-      <div class="discwrap" aria-hidden="true">
-        <div class="discglow"></div>
-        <div class="disc">
-          <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
-        </div>
-        <div class="disclabel"><img src="images/logo.jpg" alt=""></div>
-      </div>
+
     </div>
   </section>
 
@@ -417,8 +424,8 @@
 <footer>
   <div class="wrap footgrid">
     <div class="footbrand">
-      <div class="brandname" style="font-family:'Cinzel',serif;font-weight:800;">DJ Velvet Grrl</div>
-      <div class="brandtag" style="font-family:'Lobster',cursive;color:var(--crimson);">Velvet Music Mixes. Press Play.</div>
+      <div class="fbname">DJ Velvet Grrl</div>
+      <div class="fbtag">Velvet Music Mixes. Press Play.</div>
     </div>
     <div class="footlinks">
       <a href="#services">Services</a>
@@ -430,6 +437,18 @@
   </div>
   <div class="wrap footnote">DJ Velvet Grrl, LLC · Portland Metro, Oregon · book@djvelvetgrrl.com · 503-433-3442</div>
 </footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    var header = document.getElementById('siteHeader');
+    function onScroll(){
+      if(window.scrollY > 40){ header.classList.add('solid'); }
+      else { header.classList.remove('solid'); }
+    }
+    document.addEventListener('scroll', onScroll, {passive:true});
+    onScroll();
+  });
+</script>
 
 </body>
 </html>
