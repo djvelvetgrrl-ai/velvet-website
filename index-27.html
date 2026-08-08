@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DJ Velvet Grrl — Velvet Music Mixes | Portland Metro DJ</title>
+<meta name="description" content="DJ Velvet Grrl brings live-mixed music and real atmosphere to weddings, corporate events, and celebrations across Portland Metro. Velvet Music Mixes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@800&family=Lobster&family=Archivo+Black&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0a0a0a; --velvet:#141414; --panel:#191919; --panel2:#1f1f1f;
+    --crimson:#e01020; --azure:#16a4d6; --wine:#1a0304;
+    --ivory:#f7f7f7; --mauve:#a3a3a3; --line:rgba(255,255,255,.09);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--void);color:var(--ivory);font-family:"Manrope",system-ui,sans-serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  h1,h2,h3{font-family:"Archivo Black",sans-serif;font-weight:800;letter-spacing:-.01em;}
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+  .eyebrow{color:var(--azure);font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;font-weight:700;}
+  :focus-visible{outline:2px solid var(--azure);outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){ *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important;} }
+
+  /* ---------- Nav ---------- */
+  header.site{background:var(--void);border-bottom:1px solid var(--line);padding:20px 24px 14px;}
+  .brandrow{display:flex;align-items:center;gap:18px;max-width:1120px;margin:0 auto;}
+  .mark{width:56px;height:56px;border-radius:50%;background:#111;border:2px solid var(--crimson);
+    overflow:hidden;padding:0;flex:none;
+    color:var(--crimson);font-family:"Archivo Black",sans-serif;font-weight:800;font-size:18px;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 0 0 3px rgba(39,182,232,.18);}
+  .mark img{width:78%;height:78%;margin:11%;object-fit:contain;display:block;}
+  .brandblock{min-width:0;}
+  .brandname{font-family:"Cinzel",serif;font-weight:800;letter-spacing:.005em;
+    font-size:min(7.04vw, 81.4px);line-height:1.02;white-space:nowrap;
+    display:inline-block;transform:skewX(-10deg);
+    text-shadow:
+      1px 1px 0 var(--azure),
+      2px 2px 0 var(--azure),
+      3px 3px 0 var(--azure),
+      4px 4px 0 var(--azure),
+      5px 5px 8px rgba(0,0,0,.55);}
+  .brandname .big{font-size:1.28em;}
+  .brandtag{font-family:'Lobster',cursive;color:var(--crimson);font-size:clamp(24px, 4.928vw, 56.98px);
+    letter-spacing:0;text-transform:none;font-weight:400;margin-top:2px;
+    text-shadow:2px 2px 0 rgba(22,164,214,.35);}
+  nav.links{display:flex;gap:22px;font-size:13.5px;font-weight:600;max-width:1120px;margin:14px auto 0;padding:0 2px;}
+  nav.links a{opacity:.82;text-decoration:none;padding:6px 0;border-bottom:2px solid transparent;}
+  nav.links a:hover{opacity:1;border-color:var(--crimson);}
+  .footbrand .mark{width:38px;height:38px;}
+  .footbrand .brandname{font-size:19px;}
+  .footbrand .brandtag{font-size:14px;}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:13.5px;
+    padding:10px 18px;border-radius:30px;text-decoration:none;white-space:nowrap;transition:transform .15s ease;}
+  .btn:hover{transform:translateY(-1px);}
+  .btn-solid{background:var(--crimson);color:#fff;}
+  .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,.22);color:var(--ivory);}
+  @media (max-width:719px){nav.links{display:none;}}
+
+  /* ---------- Hero ---------- */
+  .hero{position:relative;min-height:90vh;display:flex;align-items:center;overflow:hidden;}
+  .hero::before{content:"";position:absolute;inset:0;
+    background:url('action-tropical.jpg') center 22% / cover no-repeat;filter:saturate(1.05) contrast(1.02);}
+  .hero::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(11,10,13,.55) 0%, rgba(11,10,13,.72) 55%, var(--void) 100%),
+               linear-gradient(90deg, rgba(11,10,13,.88) 0%, rgba(11,10,13,.35) 55%, rgba(11,10,13,.7) 100%);}
+  .hero .wrap{position:relative;z-index:2;padding-top:40px;padding-bottom:60px;}
+  .vinyl{position:absolute;right:-120px;top:50%;transform:translateY(-50%);width:520px;height:520px;
+    border-radius:50%;opacity:.5;z-index:1;pointer-events:none;
+    background:
+      repeating-radial-gradient(circle at center, rgba(255,255,255,.05) 0 2px, transparent 2px 10px),
+      radial-gradient(circle at center, #000 0 30%, #0e0e0e 30% 100%);
+    border:3px solid rgba(213,31,56,.35);animation:spin 14s linear infinite;}
+  .vinyl::after{content:"";position:absolute;inset:0;margin:auto;width:120px;height:120px;border-radius:50%;
+    background:radial-gradient(circle, var(--crimson) 0 8px, #111 8px 100%);}
+  @keyframes spin{to{transform:translateY(-50%) rotate(360deg);}}
+  .hero .eyebrow{margin-bottom:18px;}
+  .hero h1{font-size:clamp(24px, 4.928vw, 56.98px);line-height:1.02;max-width:15ch;}
+  .hero h1 em{font-style:normal;color:var(--crimson);white-space:nowrap;}
+  .hero p.lead{margin-top:20px;color:var(--mauve);font-size:17px;max-width:46ch;}
+  .hero .ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px;}
+  .hero .btn-solid{padding:14px 26px;font-size:14.5px;}
+  .hero .btn-ghost{padding:14px 26px;font-size:14.5px;}
+  .scrollcue{position:absolute;bottom:26px;left:24px;font-size:11px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--mauve);display:flex;align-items:center;gap:8px;z-index:2;}
+  .scrollcue .bar{width:1px;height:26px;background:linear-gradient(var(--crimson),transparent);}
+
+  /* ---------- Sections ---------- */
+  section{padding:96px 0;position:relative;}
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  h2.h{font-size:clamp(28px,4vw,42px);margin-top:10px;max-width:20ch;}
+  p.sub{color:var(--mauve);font-size:15.5px;max-width:56ch;margin-top:14px;}
+
+  /* Services */
+  .svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:44px;}
+  .svc-card{background:linear-gradient(180deg,var(--panel),var(--velvet));border:1px solid var(--line);
+    border-radius:16px;padding:26px 24px;transition:border-color .2s, transform .2s;}
+  .svc-card:hover{border-color:var(--crimson);transform:translateY(-3px);}
+  .svc-card.has-photo{padding:0;overflow:hidden;}
+  .svc-card.has-photo img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;}
+  .svc-card.has-photo .svc-body{padding:22px 24px 26px;}
+  .svc-num{font-family:"Archivo Black",sans-serif;color:var(--azure);font-size:12px;letter-spacing:.2em;
+    text-transform:uppercase;font-weight:700;}
+  .svc-card h3{font-size:19px;margin-top:14px;}
+  .svc-card p{color:var(--mauve);font-size:14px;margin-top:10px;}
+
+  /* About */
+  .about{display:grid;grid-template-columns:1fr;gap:44px;align-items:center;margin-top:40px;}
+  @media (min-width:860px){.about{grid-template-columns:.85fr 1fr;}}
+  .about .photo{border-radius:18px;overflow:hidden;border:1px solid var(--line);position:relative;}
+  .about .photo img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/5;}
+  .credlist{list-style:none;margin-top:26px;display:grid;gap:12px;}
+  .credlist li{display:flex;gap:12px;font-size:14.5px;color:var(--ivory);align-items:flex-start;}
+  .credlist li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--crimson);
+    margin-top:8px;flex:none;}
+
+  /* Corporate spotlight */
+  .corp{background:linear-gradient(135deg,var(--wine),var(--velvet));border-radius:22px;
+    border:1px solid rgba(213,31,56,.3);padding:6px;margin-top:10px;overflow:hidden;}
+  .corp-inner{display:grid;grid-template-columns:1fr;gap:0;border-radius:18px;overflow:hidden;}
+  @media (min-width:800px){.corp-inner{grid-template-columns:1.1fr .9fr;}}
+  .corp-copy{padding:44px 40px;}
+  .corp-copy .eyebrow{color:var(--crimson);}
+  .corp-copy h3{font-size:clamp(22px,3vw,30px);margin-top:12px;max-width:16ch;}
+  .corp-copy p{color:var(--mauve);margin-top:14px;font-size:15px;max-width:40ch;}
+  .corp-copy .btn{margin-top:24px;}
+  .corp-img{min-height:260px;}
+  .corp-img img{width:100%;height:100%;object-fit:cover;}
+
+  /* Gallery */
+  .gal{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:44px;}
+  @media (min-width:700px){.gal{grid-template-columns:repeat(4,1fr);}}
+  .gal figure{border-radius:14px;overflow:hidden;position:relative;aspect-ratio:3/4;border:1px solid var(--line);}
+  .gal figure:nth-child(1){grid-row:span 2;aspect-ratio:3/5.4;}
+  .gal img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
+  .gal figure:hover img{transform:scale(1.06);}
+
+  /* Venue variety */
+  .venuegrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:44px;}
+  .venuegrid figure{border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--panel);}
+  .venuegrid img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform .4s ease;}
+  .venuegrid figure:hover img{transform:scale(1.05);}
+  .venuegrid figcaption{padding:12px 14px;font-size:13px;font-weight:600;color:var(--mauve);}
+
+  /* Listen block */
+  .listenblock{margin-top:56px;background:linear-gradient(135deg,var(--panel),var(--velvet));
+    border:1px solid var(--line);border-radius:20px;padding:6px;overflow:hidden;}
+  .listenblock{display:grid;grid-template-columns:1fr;gap:0;}
+  @media (min-width:760px){.listenblock{grid-template-columns:1fr 1fr;align-items:stretch;}}
+  .listen-copy{padding:36px 32px;}
+  .listen-copy h3{font-size:clamp(20px,2.6vw,26px);margin-top:10px;max-width:18ch;}
+  .listen-copy p{color:var(--mauve);margin-top:12px;font-size:14.5px;max-width:38ch;}
+  .listen-embed{padding:20px;display:flex;flex-direction:column;gap:12px;}
+  .playlist-tabs{display:flex;flex-wrap:wrap;gap:8px;}
+  .ptab{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:20px;
+    padding:8px 14px;font-size:12.5px;font-weight:600;color:var(--mauve);cursor:pointer;
+    transition:all .2s ease;font-family:inherit;}
+  .ptab:hover{border-color:rgba(224,16,32,.5);color:var(--ivory);}
+  .ptab.on{background:var(--crimson);border-color:var(--crimson);color:#fff;}
+  .playlist-frame{flex:1;min-height:280px;border-radius:14px;overflow:hidden;background:rgba(0,0,0,.35);}
+  .playlist-frame iframe{width:100%;height:100%;min-height:280px;border:0;display:block;}
+
+  /* Testimonials */
+  .quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:44px;}
+  .quote{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px 24px;}
+  .quote p{font-size:15px;color:var(--ivory);}
+  .quote .who{margin-top:16px;color:var(--azure);font-size:12.5px;font-weight:700;letter-spacing:.03em;}
+  .quotenote{color:var(--mauve);font-size:12.5px;margin-top:18px;}
+
+  /* Contact */
+  .contactgrid{display:grid;grid-template-columns:1fr;gap:40px;margin-top:40px;}
+  @media (min-width:860px){.contactgrid{grid-template-columns:.9fr 1.1fr;}}
+  .contact-info{display:grid;gap:22px;align-content:start;}
+  .cinfo-item{display:flex;gap:14px;align-items:flex-start;}
+  .cinfo-ic{width:38px;height:38px;border-radius:10px;background:var(--panel);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;color:var(--crimson);flex:none;font-size:16px;}
+  .cinfo-item b{display:block;font-size:14.5px;}
+  .cinfo-item span{color:var(--mauve);font-size:13.5px;}
+  form{display:grid;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:28px;}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  label{font-size:12px;color:var(--mauve);text-transform:uppercase;letter-spacing:.08em;font-weight:700;
+    display:block;margin-bottom:6px;}
+  input,select,textarea{width:100%;background:var(--void);border:1px solid var(--line);border-radius:9px;
+    padding:11px 12px;color:var(--ivory);font-family:inherit;font-size:14px;}
+  input:focus,select:focus,textarea:focus{border-color:var(--azure);}
+  form .btn-solid{border:none;cursor:pointer;justify-self:start;margin-top:4px;font-size:14.5px;padding:13px 26px;}
+  .formnote{font-size:12px;color:var(--mauve);}
+
+  footer{border-top:1px solid var(--line);padding:40px 0 60px;}
+  .footrow{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center;}
+  .footbrand{display:flex;align-items:center;gap:12px;}
+  .footlinks{display:flex;gap:20px;font-size:13px;}
+  .footlinks a{text-decoration:none;color:var(--mauve);}
+  .footlinks a:hover{color:var(--ivory);}
+  .footlegal{color:var(--mauve);font-size:12px;margin-top:28px;}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="brandrow">
+    <div class="mark"><img src="mark-v.png" alt="DJ Velvet Grrl logo"></div>
+    <div class="brandblock">
+      <div class="brandname"><span class="big">DJ</span> <span class="big">V</span>elvet <span class="big">G</span>rrl</div>
+      <div class="brandtag">Velvet Music Mixes</div>
+    </div>
+  </div>
+  <nav class="links">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="vinyl" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="eyebrow">Portland Metro · Corporate, Community &amp; Milestone Events</div>
+    <h1>Music and memories,<br><em>mixed live</em>.</h1>
+    <p class="lead">DJ Velvet Grrl reads the room and builds it in real time — no pre-set playlists, no dead air. Just the right track, at the right moment, for as long as the night needs it.</p>
+    <div class="ctas">
+      <a class="btn btn-solid" href="intake.html">Request a Quote</a>
+      <a class="btn btn-ghost" href="#gallery">See Her in Action</a>
+    </div>
+  </div>
+  <div class="scrollcue"><span class="bar"></span> Scroll</div>
+</section>
+
+<main>
+
+  <section id="services">
+    <div class="wrap reveal">
+      <div class="eyebrow">What she plays for</div>
+      <h2 class="h">Community first, always.</h2>
+      <p class="sub">Every event gets the same thing: live-read music, clean transitions, and a host who knows when to speak and when to get out of the way.</p>
+      <div class="svc-grid">
+        <div class="svc-card">
+          <div class="svc-num">Corporate &amp; Small Business</div>
+          <h3>Events with a job to do</h3>
+          <p>Launches, holiday parties, company picnics, and small business milestones where the music supports the room, not competes with it. Clean, professional, on time.</p>
+        </div>
+        <div class="svc-card">
+          <div class="svc-num">Community &amp; Charity</div>
+          <h3>Bigger than a guest list</h3>
+          <p>Festivals, nonprofit galas, fundraisers, and neighborhood block parties — reading a crowd that's there for the cause or the community, not just the DJ.</p>
+        </div>
+        <div class="svc-card">
+          <div class="svc-num">Milestones</div>
+          <h3>Built around one person</h3>
+          <p>Retirements, birthdays, anniversaries — celebrated at the venue that fits, with energy that matches the honoree, not a template.</p>
+        </div>
+        <div class="svc-card has-photo">
+          <img src="wedding-ceremony.jpg" alt="A wedding ceremony under a rainbow canopy">
+          <div class="svc-body">
+            <div class="svc-num">Weddings</div>
+            <h3>Ceremony to send-off, for every couple</h3>
+            <p>All couples welcome, including LGBTQ+ celebrations — timed entrances, toast sound, a floor that fills and stays full. Built around your run of show.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap reveal">
+      <div class="about">
+        <div class="photo">
+          <img src="booth-detail.jpg" alt="DJ Velvet Grrl mixing live on a Pioneer DJ controller" loading="lazy">
+        </div>
+        <div>
+          <div class="eyebrow">Who's behind the decks</div>
+          <h2 class="h">Velvet Grrl.</h2>
+          <p class="sub">Portland-based, independently run, and hands-on with every booking — from the first email to the last song. She builds the set for your room specifically, then reads the floor and adjusts live all night.</p>
+          <ul class="credlist">
+            <li>DJ Velvet Grrl, LLC — licensed &amp; insured in Oregon</li>
+            <li>Own professional PA, lighting, and backup equipment at every gig</li>
+            <li>Direct communication — no call center, no rotating staff</li>
+            <li>Inclusive and LGBTQ+-welcoming, every guest list</li>
+            <li>Serving Portland Metro and surrounding areas</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="corporate">
+    <div class="wrap reveal">
+      <div class="corp">
+        <div class="corp-inner">
+          <div class="corp-copy">
+            <div class="eyebrow">For event planners &amp; teams</div>
+            <h3>Level up your next corporate event.</h3>
+            <p>Add music and momentum to launches, holiday parties, and all-hands celebrations — booked directly, priced clearly, no surprises on the invoice.</p>
+            <a class="btn btn-solid" href="#contact">Talk Through Your Event</a>
+          </div>
+          <div class="corp-img">
+            <img src="corporate-promo.jpg" alt="DJ Velvet Grrl corporate event promo card" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <div class="wrap reveal">
+      <div class="eyebrow">On the night</div>
+      <h2 class="h">A few rooms she's built.</h2>
+      <div class="gal">
+        <figure><img src="action-garden.jpg" alt="DJ Velvet Grrl performing at an outdoor garden wedding" loading="lazy"></figure>
+        <figure><img src="action-tropical.jpg" alt="DJ Velvet Grrl performing at an outdoor tropical-themed event" loading="lazy"></figure>
+        <figure><img src="action-halloween.jpg" alt="DJ Velvet Grrl performing at a Halloween-themed party" loading="lazy"></figure>
+        <figure><img src="action-homeset.jpg" alt="DJ Velvet Grrl at her setup with stage lighting" loading="lazy"></figure>
+        <figure><img src="action-bluelight.jpg" alt="DJ Velvet Grrl performing at a blue-lit evening party" loading="lazy"></figure>
+      </div>
+      <p style="margin-top:24px;">
+        <a href="https://boothpics.com/portfolios/f992f2d0-3898-5864-8973-1f150d7dfe59" target="_blank" rel="noopener" style="color:var(--azure);font-weight:600;text-decoration:none;">
+          See more event photos from festivals, milestones &amp; celebrations →
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <section id="venues">
+    <div class="wrap reveal">
+      <div class="eyebrow">Range, not just a claim</div>
+      <h2 class="h">Where she's played.</h2>
+      <p class="sub">Lakeside afternoons, backyard fiestas, milestone birthdays, motorcycle club parties — if it's got people and a reason to celebrate, she's probably already read that room.</p>
+      <div class="venuegrid">
+        <figure>
+          <img src="venue-lake.jpg" alt="Lakeside gig with guests in camp chairs by the water" loading="lazy">
+          <figcaption>Lakeside day party</figcaption>
+        </figure>
+        <figure>
+          <img src="venue-fiesta.jpg" alt="Backyard fiesta-themed party" loading="lazy">
+          <figcaption>Backyard fiesta</figcaption>
+        </figure>
+        <figure>
+          <img src="venue-hawaii.jpg" alt="Hawaii-themed graduation and birthday party" loading="lazy">
+          <figcaption>Graduation &amp; birthday</figcaption>
+        </figure>
+      </div>
+
+      <div class="listenblock">
+        <div class="listen-copy">
+          <div class="eyebrow">Hear the range</div>
+          <h3>Eclectic isn't just a word she uses.</h3>
+          <p>Breakbeats to yacht rock and everything in between — press play and hear what "reading the room" actually sounds like.</p>
+        </div>
+        <div class="listen-embed">
+          <div class="playlist-tabs" id="playlistTabs">
+            <button class="ptab on" data-id="57557d3b-cb98-40e3-99f5-7398b12b2e70">Breakbeat Crate</button>
+            <button class="ptab" data-id="505a1729-6ca3-495c-a3f1-7a23d0eb2b0a">Bar Mitzvah</button>
+            <button class="ptab" data-id="f6a845fa-7eab-44d1-8838-58cafab1c9a4">La Bamba Fiesta</button>
+            <button class="ptab" data-id="f92d332c-b7c7-44b6-9b45-b03b626522fe">Yacht Rock</button>
+            <button class="ptab" data-id="f547feb7-9600-4ca2-a0e6-0244c7e62a63">Disco Party</button>
+          </div>
+          <div class="playlist-frame">
+            <iframe id="playlistFrame" src="https://embed.tidal.com/playlists/57557d3b-cb98-40e3-99f5-7398b12b2e70?layout=gridify" allowfullscreen allow="encrypted-media *; fullscreen *; web-share *;" loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials">
+    <div class="wrap reveal">
+      <div class="eyebrow">In their words</div>
+      <h2 class="h">What it's like to book her.</h2>
+      <div class="quotes">
+        <div class="quote">
+          <p>"Every request landed, the transitions were seamless, and the dance floor never emptied. Exactly what we needed for the reception."</p>
+          <div class="who">— Sample wedding client</div>
+        </div>
+        <div class="quote">
+          <p>"Professional from the first email to load-out. The playlist matched our brand and the energy was perfect for a mixed-generation crowd."</p>
+          <div class="who">— Sample corporate client</div>
+        </div>
+        <div class="quote">
+          <p>"She read the room better than we could have described it to her. Booking again for next year without question."</p>
+          <div class="who">— Sample community event client</div>
+        </div>
+      </div>
+      <p class="quotenote">Placeholder quotes — swap these for real client testimonials as they come in.</p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap reveal">
+      <div class="eyebrow">Let's talk about your date</div>
+      <h2 class="h">Request a quote.</h2>
+      <p class="sub">Tell her a bit about the event — she'll follow up personally, usually within a couple of business days.</p>
+      <div class="contactgrid">
+        <div class="contact-info">
+          <div class="cinfo-item">
+            <div class="cinfo-ic">☎</div>
+            <div><b>Call or text</b><span><a href="tel:5034333442">503-433-3442</a></span></div>
+          </div>
+          <div class="cinfo-item">
+            <div class="cinfo-ic">✎</div>
+            <div><b>Email</b><span><a href="mailto:book@djvelvetgrrl.com">book@djvelvetgrrl.com</a></span></div>
+          </div>
+          <div class="cinfo-item">
+            <div class="cinfo-ic">◇</div>
+            <div><b>Instagram</b><span><a href="https://www.instagram.com/djvelvetgrrl/" target="_blank" rel="noopener">@djvelvetgrrl</a></span></div>
+          </div>
+          <div class="cinfo-item">
+            <div class="cinfo-ic">◈</div>
+            <div><b>Based in</b><span>Portland Metro, Oregon</span></div>
+          </div>
+        </div>
+
+        <form id="quoteForm">
+          <div class="two-col">
+            <div><label for="q_name">Name</label><input id="q_name" required></div>
+            <div><label for="q_email">Email</label><input id="q_email" type="email" required></div>
+          </div>
+          <div class="two-col">
+            <div><label for="q_date">Event date</label><input id="q_date" type="date"></div>
+            <div><label for="q_type">Event type</label>
+              <select id="q_type">
+                <option>Wedding</option><option>Corporate</option>
+                <option>Birthday / Celebration</option><option>Community / Nonprofit</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div><label for="q_venue">Venue (if known)</label><input id="q_venue"></div>
+          <div><label for="q_msg">Tell her about the event</label>
+            <textarea id="q_msg" rows="4" placeholder="Guest count, vibe, must-play songs, anything else."></textarea></div>
+          <button class="btn btn-solid" type="submit">Send Request</button>
+          <div class="formnote">Opens your email app with the details pre-filled — nothing is sent until you hit send there.</div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footrow">
+      <div class="footbrand">
+        <div class="mark"><img src="mark-v.png" alt="DJ Velvet Grrl logo"></div>
+        <div>
+          <div class="brandname"><span class="big">DJ</span> <span class="big">V</span>elvet <span class="big">G</span>rrl, LLC</div>
+          <div class="brandtag">Velvet Music Mixes</div>
+        </div>
+      </div>
+      <div class="footlinks">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+        <a href="https://www.instagram.com/djvelvetgrrl/" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+    <div class="footlegal">© <span id="yr"></span> DJ Velvet Grrl, LLC · Portland Metro, Oregon</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // Scroll reveal
+  const els = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:.12});
+    els.forEach(el=>io.observe(el));
+  } else { els.forEach(el=>el.classList.add('in')); }
+
+  // Playlist tab switcher
+  const ptabs = document.querySelectorAll('.ptab');
+  const pframe = document.getElementById('playlistFrame');
+  ptabs.forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      ptabs.forEach(t=>t.classList.remove('on'));
+      tab.classList.add('on');
+      pframe.src = `https://embed.tidal.com/playlists/${tab.dataset.id}?layout=gridify`;
+    });
+  });
+
+  // Quote form -> mailto
+  document.getElementById('quoteForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('q_name').value.trim();
+    const email = document.getElementById('q_email').value.trim();
+    const date = document.getElementById('q_date').value;
+    const type = document.getElementById('q_type').value;
+    const venue = document.getElementById('q_venue').value.trim();
+    const msg = document.getElementById('q_msg').value.trim();
+    const body = [
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Event date: ${date || 'TBD'}`,
+      `Event type: ${type}`,
+      `Venue: ${venue || 'TBD'}`,
+      '',
+      msg
+    ].join('\n');
+    window.location.href = `mailto:book@djvelvetgrrl.com?subject=${encodeURIComponent('Quote request — '+type+(date?(' — '+date):''))}&body=${encodeURIComponent(body)}`;
+  });
+</script>
+
+</body>
+</html>
