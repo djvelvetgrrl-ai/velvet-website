@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Velvet Music Mixes — Start Your Booking</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Manrope:wght@400;500;600;700;800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@800&family=Lobster&family=Archivo+Black&family=Manrope:wght@400;500;600;700;800&display=swap');
 
   :root{
     --ink:#0a0a0a;
@@ -43,25 +43,34 @@
     text-align:center;
     margin-bottom:6px;
   }
+  .wordmark .badge{
+    width:64px;height:64px;border-radius:50%;
+    background:#111;border:2px solid var(--crimson);
+    margin:0 auto 14px;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 0 0 4px rgba(22,164,214,0.18);
+  }
+  .wordmark .badge img{width:76%;height:76%;object-fit:contain;display:block;}
   .wordmark h1{
-    font-family:'Syne', sans-serif;
+    font-family:'Cinzel', serif;
     font-weight:800;
-    font-size:clamp(34px, 7vw, 46px);
+    font-size:clamp(28px, 6vw, 38px);
     letter-spacing:0.5px;
     margin:0;
-    line-height:0.95;
-    background:linear-gradient(180deg, #fff 0%, var(--gold) 120%);
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
+    line-height:1.1;
+    color:var(--ivory);
+    text-shadow:2px 3px 0 var(--azure), 3px 5px 8px rgba(0,0,0,.4);
   }
+  .wordmark h1 .big{font-size:1.32em;}
   .wordmark p{
-    margin:6px 0 0;
-    font-size:13px;
-    letter-spacing:2.5px;
-    text-transform:uppercase;
-    color:var(--gold);
-    font-weight:500;
+    margin:8px 0 0;
+    font-family:'Lobster',cursive;
+    font-size:17px;
+    letter-spacing:0;
+    text-transform:none;
+    color:var(--crimson);
+    font-weight:400;
+    text-shadow:1.5px 1.5px 0 rgba(22,164,214,.35);
   }
 
   .card{
@@ -297,7 +306,7 @@
   .btn-back:hover{ color:var(--ivory); }
 
   .section-title{
-    font-family:'Syne', sans-serif;
+    font-family:'Archivo Black', sans-serif;
     font-weight:700;
     font-size:20px;
     color:var(--gold);
@@ -317,7 +326,7 @@
     margin-bottom:14px;
   }
   .reviewblock h4{
-    font-family:'Syne', sans-serif;
+    font-family:'Archivo Black', sans-serif;
     font-size:14px;
     letter-spacing:0.5px;
     text-transform:uppercase;
@@ -332,7 +341,8 @@
 
 <div class="stage">
   <div class="wordmark">
-    <h1>DJ Velvet Grrl</h1>
+    <div class="badge"><img src="mark-v.png" alt="DJ Velvet Grrl logo"></div>
+    <h1><span class="big">DJ</span> <span class="big">V</span>elvet <span class="big">G</span>rrl</h1>
     <p>Velvet Music Mixes</p>
   </div>
 
@@ -368,15 +378,18 @@
       </div>
 
       <div class="grid" id="eventGrid">
-        <button class="etype" data-type="Wedding"><span class="glow"></span><span>Wedding</span></button>
         <button class="etype" data-type="Corporate"><span class="glow"></span><span>Corporate Event</span></button>
+        <button class="etype" data-type="Fundraiser/Nonprofit"><span class="glow"></span><span>Fundraiser / Nonprofit</span></button>
+        <button class="etype" data-type="Company Picnic"><span class="glow"></span><span>Company Picnic</span></button>
+        <button class="etype" data-type="Family Reunion"><span class="glow"></span><span>Family Reunion</span></button>
+        <button class="etype" data-type="Festival"><span class="glow"></span><span>Festival</span></button>
+        <button class="etype" data-type="Retirement"><span class="glow"></span><span>Retirement Celebration</span></button>
         <button class="etype" data-type="Milestone Birthday"><span class="glow"></span><span>Milestone Birthday</span></button>
+        <button class="etype" data-type="Holiday Party"><span class="glow"></span><span>Holiday Party</span></button>
+        <button class="etype" data-type="Private Party"><span class="glow"></span><span>Private / Dinner Party</span></button>
         <button class="etype" data-type="School Event"><span class="glow"></span><span>School Event</span></button>
-        <button class="etype" data-type="Private Party"><span class="glow"></span><span>Private Party</span></button>
-        <button class="etype" data-type="Community/Nonprofit"><span class="glow"></span><span>Community / Nonprofit</span></button>
-        <button class="etype" data-type="Bar/Nightclub"><span class="glow"></span><span>Bar / Nightclub</span></button>
-        <button class="etype" data-type="Sporting/Brand"><span class="glow"></span><span>Sporting / Brand</span></button>
         <button class="etype" data-type="Something Else"><span class="glow"></span><span>Something Else</span></button>
+        <button class="etype" data-type="Wedding"><span class="glow"></span><span>Wedding</span></button>
       </div>
 
       <div id="plannerNames" style="display:none;">
@@ -470,7 +483,7 @@
           <select id="i_mc"><option>DJ Velvet Grrl</option><option>Separate MC/host</option><option>Not sure yet</option></select>
         </div>
         <div class="field"><label>Add-ons interested in?</label>
-          <select id="i_addons"><option>Not sure yet</option><option>Photo booth</option><option>Uplighting</option><option>None needed</option></select>
+          <select id="i_addons"><option>Not sure yet</option><option>Photo booth</option><option>Uplighting</option><option>Karaoke</option><option>Silent Disco</option><option>MC / hosting services</option><option>None needed</option></select>
         </div>
       </div>
       <div class="field"><label>Load-in time &amp; access notes <span class="opt">(stairs, elevator, parking)</span></label><input type="text" id="i_loadin"></div>
