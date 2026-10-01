@@ -444,7 +444,7 @@
 (function(){
   // Inquiry form -> Google Sheet + email notice. Until the address below is filled in,
   // the form keeps working the old way (opens the visitor's email app).
-  var ENDPOINT = 'PASTE_WEB_APP_URL_HERE';
+  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbxis-seHeXpwKlZWw6NKm0PDCJT7f-ASOjUpxlWvLvQDCsh5hTz4dOVCplJaI2Pun_NDQ/exec';
   var form = document.getElementById('inquiryForm');
   if(!form || ENDPOINT.indexOf('http') !== 0) return;
   var note = document.getElementById('inquiryNote');

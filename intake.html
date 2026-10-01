@@ -645,7 +645,7 @@
     ].filter(Boolean).join('\n');
 
     const subject = `New booking inquiry — ${selectedType}${v('i_date') ? ' — '+v('i_date') : ''} — ${v('i_name') || v('p_clientName') || 'Unnamed'}`;
-    const ENDPOINT = 'PASTE_WEB_APP_URL_HERE';
+    const ENDPOINT = 'https://script.google.com/macros/s/AKfycbxis-seHeXpwKlZWw6NKm0PDCJT7f-ASOjUpxlWvLvQDCsh5hTz4dOVCplJaI2Pun_NDQ/exec';
     if (ENDPOINT.indexOf('http') !== 0) {
       // Not connected yet: keep the old email-app behavior.
       window.location.href = `mailto:book@djvelvetgrrl.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines)}`;
