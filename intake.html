@@ -645,7 +645,49 @@
     ].filter(Boolean).join('\n');
 
     const subject = `New booking inquiry — ${selectedType}${v('i_date') ? ' — '+v('i_date') : ''} — ${v('i_name') || v('p_clientName') || 'Unnamed'}`;
-    window.location.href = `mailto:book@djvelvetgrrl.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines)}`;
+    const ENDPOINT = 'PASTE_WEB_APP_URL_HERE';
+    if (ENDPOINT.indexOf('http') !== 0) {
+      // Not connected yet: keep the old email-app behavior.
+      window.location.href = `mailto:book@djvelvetgrrl.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines)}`;
+      return;
+    }
+    const btn = document.getElementById('sendBtn');
+    let note = document.getElementById('sendNote');
+    if (!note) {
+      note = document.createElement('p');
+      note.id = 'sendNote';
+      note.setAttribute('role', 'status');
+      note.style.cssText = 'margin-top:14px;font-weight:600;';
+      btn.parentNode.parentNode.appendChild(note);
+    }
+    if (!v('i_name') || !v('i_email')) {
+      note.textContent = 'Please add your name and email so I can reply.';
+      return;
+    }
+    btn.disabled = true;
+    note.textContent = 'Sending...';
+    fetch(ENDPOINT, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({
+        form: 'intake',
+        page: location.href,
+        name: v('i_name'),
+        email: v('i_email'),
+        phone: v('i_phone'),
+        event_type: selectedType || '',
+        event_date: v('i_date'),
+        subject: subject,
+        details: lines
+      })
+    }).then(() => {
+      btn.textContent = 'Sent';
+      note.textContent = 'Thank you! Your details are in. I will be in touch within two business days.';
+    }).catch(() => {
+      btn.disabled = false;
+      note.textContent = 'Something went wrong. Please email book@djvelvetgrrl.com or call 503-433-3442.';
+    });
   });
 </script>
 

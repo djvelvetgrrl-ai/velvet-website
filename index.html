@@ -378,7 +378,7 @@
         <a class="btn-primary" href="intake.html" style="display:inline-block;">Start full booking form</a>
       </div>
     </div>
-    <form action="mailto:book@djvelvetgrrl.com" method="post" enctype="text/plain">
+    <form id="inquiryForm" action="mailto:book@djvelvetgrrl.com" method="post" enctype="text/plain">
       <div class="fld"><label>Name</label><input type="text" name="name" required></div>
       <div class="fld"><label>Email</label><input type="email" name="email" required></div>
       <div class="fld"><label>Event type</label>
@@ -405,6 +405,7 @@
       <div class="fld"><label>Event date</label><input type="date" name="event_date"></div>
       <div class="fld"><label>Tell me about your event</label><textarea name="details" placeholder="Guest count, venue, vibe you're picturing…"></textarea></div>
       <button type="submit">Send inquiry</button>
+      <p id="inquiryNote" role="status" style="margin-top:12px;font-weight:600;"></p>
     </form>
   </div>
 </section>
@@ -437,6 +438,44 @@
   function onScroll(){ if(window.scrollY>40){header.classList.add('solid');}else{header.classList.remove('solid');} }
   document.addEventListener('scroll', onScroll, {passive:true});
   onScroll();
+</script>
+
+<script>
+(function(){
+  // Inquiry form -> Google Sheet + email notice. Until the address below is filled in,
+  // the form keeps working the old way (opens the visitor's email app).
+  var ENDPOINT = 'PASTE_WEB_APP_URL_HERE';
+  var form = document.getElementById('inquiryForm');
+  if(!form || ENDPOINT.indexOf('http') !== 0) return;
+  var note = document.getElementById('inquiryNote');
+
+  var trap = document.createElement('input');
+  trap.type = 'text'; trap.name = 'website'; trap.tabIndex = -1; trap.autocomplete = 'off';
+  trap.setAttribute('aria-hidden','true');
+  trap.style.cssText = 'position:absolute;left:-9999px;opacity:0;height:0;width:0;';
+  form.appendChild(trap);
+
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var btn = form.querySelector('button[type=submit]');
+    var body = { form:'inquiry', page:location.href };
+    new FormData(form).forEach(function(val,key){ body[key] = val; });
+    if(btn) btn.disabled = true;
+    note.textContent = 'Sending...';
+    fetch(ENDPOINT, {
+      method:'POST', mode:'no-cors',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body: JSON.stringify(body)
+    }).then(function(){
+      note.textContent = 'Thank you! Your inquiry is in. Expect a reply within two business days.';
+      form.reset();
+      if(btn) btn.disabled = false;
+    }).catch(function(){
+      note.textContent = 'Something went wrong. Please email book@djvelvetgrrl.com or call 503-433-3442.';
+      if(btn) btn.disabled = false;
+    });
+  });
+})();
 </script>
 
 </body>
