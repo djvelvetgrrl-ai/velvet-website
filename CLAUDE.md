@@ -146,6 +146,6 @@ Delegate only when the work is independent and worth the extra cost. Do not have
 - `ENDPOINT` is defined separately in both HTML files and must stay identical in both.
 - Submitting either form against the live endpoint adds a real row to the Sheet and sends a real email. Never submit test data to it without asking first.
 - The inquiry form in `index.html` also carries a `mailto:` action as its fallback.
-- Deployment is not documented in the repository. Do not assume how or where the site is published; ask.
+- The site is published automatically through Cloudflare when changes reach `main` (stated by the owner; nothing else in the repository documents it). Treat a merge to `main` as a live deploy.
 - Pages load Google Fonts and the TIDAL embed from external hosts. Add no other external scripts, fonts, or trackers without asking.
 - Form fields collect client names, contact details, and event details. Keep real submissions, screenshots of the Sheet, and personal data out of commits, fixtures, and prompts; use invented values.
