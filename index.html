@@ -126,7 +126,8 @@
 
   /* Pricing */
   .pricing-grid{display:grid;grid-template-columns:1fr;gap:20px;max-width:920px;margin:0 auto;}
-  @media(min-width:820px){.pricing-grid{grid-template-columns:1.3fr 1fr;align-items:stretch;}}
+  @media(min-width:820px){.pricing-grid{grid-template-columns:1fr 1fr;align-items:stretch;}.pricing-grid>.pricing:nth-child(3){grid-column:span 2;}}
+  @media(min-width:1040px){.pricing-grid{grid-template-columns:repeat(3,1fr);max-width:1100px;}.pricing-grid>.pricing:nth-child(3){grid-column:auto;}}
   .pricing{background:linear-gradient(160deg,#fff5f2,#ffffff);border:1px solid #f3c9c2;
     border-radius:22px;padding:32px;display:flex;flex-direction:column;box-shadow:0 4px 18px rgba(213,31,56,.06);}
   .pricing.alt{background:var(--paper-panel);border:1px solid var(--line);box-shadow:0 2px 10px rgba(28,20,23,.04);}
@@ -266,12 +267,30 @@
           <li>Full PA sound system, sized to your venue</li>
           <li>Pre-event planning call and a written run sheet</li>
           <li>Custom-built setlist matched to your event's energy arc</li>
-          <li>Wireless mic for toasts, announcements, and speeches</li>
+          <li>Photo booth for the full event, with a standard backdrop (digital photos, no prints)</li>
           <li>Day-of setup, sound check, and breakdown included</li>
         </ul>
         <div class="price-box">
           <div class="amt">$1,800</div>
           <div class="rate">flat rate, up to 4 hours</div>
+          <div class="price-row"><span>Each additional hour</span><b>$400 / hr</b></div>
+          <a class="btn-primary" href="#contact">Check my date</a>
+        </div>
+      </div>
+      <div class="pricing alt">
+        <div class="flag">Music only</div>
+        <h2>Standard DJ</h2>
+        <p class="blurb">Live-mixed music built around your guests, for the event that does not need the full Sha-bang.</p>
+        <ul>
+          <li>Music curating with a planning call</li>
+          <li>Live mixing with a full PA sound system</li>
+          <li>Day-of setup, sound check, and breakdown included</li>
+          <li>Add an MC for $300 (up to 4 hours, then $100 / hr)</li>
+          <li>Add the photo booth: $800 for up to 4 hours (4-hour minimum), then $200 / hr</li>
+        </ul>
+        <div class="price-box">
+          <div class="amt">$800</div>
+          <div class="rate">up to 4 hours</div>
           <div class="price-row"><span>Each additional hour</span><b>$200 / hr</b></div>
           <a class="btn-primary" href="#contact">Check my date</a>
         </div>
@@ -279,15 +298,13 @@
       <div class="pricing alt">
         <div class="flag">For shorter bookings</div>
         <h2>Standalone Hour</h2>
-        <p class="blurb">Built for B2B events, retirement community lunches, and other short-format bookings. One hour of live DJ service — a toast, a short ceremony slot, a quick milestone moment. Not a slice of the Sha-bang, its own thing.</p>
+        <p class="blurb">Built for retirement community lunches, nursing homes, country clubs, business events, and back-to-back DJ lineups. One hour of live DJ service, set up and ready before your start time.</p>
         <ul>
           <li>Please allow 1 hour before your start time for DJ setup</li>
-          <li>Photo booth add-on needs 30 minutes for setup</li>
         </ul>
         <div class="price-box">
           <div class="amt">$350</div>
           <div class="rate">flat, 1 hour</div>
-          <div class="price-row"><span>Add the photo booth (digital photos, no prints)</span><b>+$150</b></div>
           <a class="btn-primary" href="#contact">Ask about a short booking</a>
         </div>
       </div>
@@ -295,6 +312,7 @@
     <div class="terms-strip">
       <span>Retainer to hold your date: <b>$300</b></span>
       <span>Balance terms: <b>Net 30</b></span>
+      <span>Travel: <b>included within 15 miles of downtown Milwaukie</b></span>
     </div>
   </div>
 </section>
