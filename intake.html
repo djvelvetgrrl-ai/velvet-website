@@ -98,6 +98,11 @@
     border:1px solid rgba(255,255,255,0.12);
     border-radius:12px;
     margin-bottom:22px;
+    width:100%;
+    background:none;
+    color:inherit;
+    font:inherit;
+    text-align:left;
     cursor:pointer;
     transition:border-color 0.2s ease, background 0.2s ease;
   }
@@ -131,6 +136,7 @@
   .planner-row.checked .checkbox svg{ opacity:1; transform:scale(1); }
 
   .planner-label{
+    display:block;
     font-size:14.5px;
     line-height:1.4;
   }
@@ -275,6 +281,8 @@
     border:1px solid rgba(255,255,255,0.14);
     border-radius:20px;
     padding:8px 14px;
+    color:inherit;
+    font-family:inherit;
     font-size:13px;
     cursor:pointer;
     transition:all 0.2s ease;
@@ -366,17 +374,17 @@
     <div class="screen active" data-screen="0">
       <p class="prompt">Let's get your event booked. <strong>First, tell us a bit about it.</strong></p>
 
-      <div class="planner-row" id="plannerRow">
-        <div class="checkbox">
+      <button type="button" class="planner-row" id="plannerRow" role="checkbox" aria-checked="false">
+        <span class="checkbox">
           <svg viewBox="0 0 24 24" fill="none" stroke="#151515" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="20 6 9 17 4 12"></polyline>
           </svg>
-        </div>
-        <div class="planner-label">
+        </span>
+        <span class="planner-label">
           I'm booking this on behalf of someone else
           <span class="sub">Event planners — check this first</span>
-        </div>
-      </div>
+        </span>
+      </button>
       <div class="planner-followup">
         <div class="planner-followup-inner">
           Got it — we'll grab your contact info for logistics, then the end client's details for music &amp; moments.
@@ -384,18 +392,18 @@
       </div>
 
       <div class="grid" id="eventGrid">
-        <button class="etype" data-type="Corporate"><span class="glow"></span><span>Corporate Event</span></button>
-        <button class="etype" data-type="Fundraiser/Nonprofit"><span class="glow"></span><span>Fundraiser / Nonprofit</span></button>
-        <button class="etype" data-type="Company Picnic"><span class="glow"></span><span>Company Picnic</span></button>
-        <button class="etype" data-type="Family Reunion"><span class="glow"></span><span>Family Reunion</span></button>
-        <button class="etype" data-type="Festival"><span class="glow"></span><span>Festival</span></button>
-        <button class="etype" data-type="Retirement"><span class="glow"></span><span>Retirement Celebration</span></button>
-        <button class="etype" data-type="Milestone Birthday"><span class="glow"></span><span>Milestone Birthday</span></button>
-        <button class="etype" data-type="Holiday Party"><span class="glow"></span><span>Holiday Party</span></button>
-        <button class="etype" data-type="Private Party"><span class="glow"></span><span>Private / Dinner Party</span></button>
-        <button class="etype" data-type="School Event"><span class="glow"></span><span>School Event</span></button>
-        <button class="etype" data-type="Something Else"><span class="glow"></span><span>Something Else</span></button>
-        <button class="etype" data-type="Wedding"><span class="glow"></span><span>Wedding</span></button>
+        <button type="button" class="etype" aria-pressed="false" data-type="Corporate"><span class="glow"></span><span>Corporate Event</span></button>
+        <button type="button" class="etype" aria-pressed="false" data-type="Fundraiser/Nonprofit"><span class="glow"></span><span>Fundraiser / Nonprofit</span></button>
+        <button type="button" class="etype" aria-pressed="false" data-type="Company Picnic"><span class="glow"></span><span>Company Picnic</span></button>
+        <button type="button" class="etype" aria-pressed="false" data-type="Family Reunion"><span class="glow"></span><span>Family Reunion</span></button>
+        <button type="button" class="etype" aria-pressed="false" data-type="Festival"><span class="glow"></span><span>Festival</span></button>
+        <button type="button" class="etype" aria-pressed="false" data-type="Retirement"><span class="glow"></span><span>Retirement Celebration</span></button>
+        <button type="button" class="etype" aria-pressed="false" data-type="Milestone Birthday"><span class="glow"></span><span>Milestone Birthday</span></button>
+        <button type="button" class="etype" aria-pressed="false" data-type="Holiday Party"><span class="glow"></span><span>Holiday Party</span></button>
+        <button type="button" class="etype" aria-pressed="false" data-type="Private Party"><span class="glow"></span><span>Private / Dinner Party</span></button>
+        <button type="button" class="etype" aria-pressed="false" data-type="School Event"><span class="glow"></span><span>School Event</span></button>
+        <button type="button" class="etype" aria-pressed="false" data-type="Something Else"><span class="glow"></span><span>Something Else</span></button>
+        <button type="button" class="etype" aria-pressed="false" data-type="Wedding"><span class="glow"></span><span>Wedding</span></button>
       </div>
 
       <p class="pricenote" style="margin-top:14px;">
@@ -492,12 +500,12 @@
       <div class="field">
         <label>Special sequences</label>
         <div class="chiprow" id="momentChips">
-          <div class="chip" data-val="Grand entrance">Grand entrance</div>
-          <div class="chip" data-val="First dance">First dance</div>
-          <div class="chip" data-val="Toasts / speeches">Toasts / speeches</div>
-          <div class="chip" data-val="Cake cutting">Cake cutting</div>
-          <div class="chip" data-val="Dedications">Dedications</div>
-          <div class="chip" data-val="Send-off">Send-off</div>
+          <button type="button" class="chip" data-val="Grand entrance" aria-pressed="false">Grand entrance</button>
+          <button type="button" class="chip" data-val="First dance" aria-pressed="false">First dance</button>
+          <button type="button" class="chip" data-val="Toasts / speeches" aria-pressed="false">Toasts / speeches</button>
+          <button type="button" class="chip" data-val="Cake cutting" aria-pressed="false">Cake cutting</button>
+          <button type="button" class="chip" data-val="Dedications" aria-pressed="false">Dedications</button>
+          <button type="button" class="chip" data-val="Send-off" aria-pressed="false">Send-off</button>
         </div>
       </div>
       <div class="field"><label>Details on any of the above <span class="opt">(optional)</span></label><textarea id="i_moments" placeholder="Specific songs or timing"></textarea></div>
@@ -547,6 +555,7 @@
   const plannerNames = document.getElementById('plannerNames');
   plannerRow.addEventListener('click', () => {
     plannerRow.classList.toggle('checked');
+    plannerRow.setAttribute('aria-checked', plannerRow.classList.contains('checked'));
     plannerNames.style.display = plannerRow.classList.contains('checked') ? 'block' : 'none';
   });
 
@@ -554,8 +563,9 @@
   const typeButtons = document.querySelectorAll('.etype');
   typeButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      typeButtons.forEach(b => b.classList.remove('selected'));
+      typeButtons.forEach(b => { b.classList.remove('selected'); b.setAttribute('aria-pressed', 'false'); });
       btn.classList.add('selected');
+      btn.setAttribute('aria-pressed', 'true');
       selectedType = btn.dataset.type;
     });
   });
@@ -563,7 +573,10 @@
   // ---- Moment chips (multi-select) ----
   const momentChips = document.querySelectorAll('#momentChips .chip');
   momentChips.forEach(chip => {
-    chip.addEventListener('click', () => chip.classList.toggle('selected'));
+    chip.addEventListener('click', () => {
+      chip.classList.toggle('selected');
+      chip.setAttribute('aria-pressed', chip.classList.contains('selected'));
+    });
   });
 
   // ---- Screen navigation ----
