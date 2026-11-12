@@ -139,7 +139,9 @@ Delegate only when the work is independent and worth the extra cost. Do not have
 
 - `index.html`: landing page, inquiry form, TIDAL embed, form script near the end of the file.
 - `intake.html`: booking form and its submit script near the end of the file.
-- `wrangler.toml`: static assets config, serving the repository root as the asset directory.
+- `wrangler.toml`: static assets config, serving the repository root as the asset directory, and the custom domains `djvelvetgrrl.com` and `www.djvelvetgrrl.com`. Keep both domains listed: removing either one can detach it from the site on the next deploy.
+- `.assetsignore`: files Cloudflare must not publish. Everything else in the repository root is public on the website.
+- `docs/decisions.md`: the decision record. Add an entry for each decision and its reason.
 
 **Known gotchas:**
 
@@ -147,5 +149,10 @@ Delegate only when the work is independent and worth the extra cost. Do not have
 - Submitting either form against the live endpoint adds a real row to the Sheet and sends a real email. Never submit test data to it without asking first.
 - The inquiry form in `index.html` also carries a `mailto:` action as its fallback.
 - The site is published automatically through Cloudflare when changes reach `main` (stated by the owner; nothing else in the repository documents it). Treat a merge to `main` as a live deploy.
+- Images are inlined in the HTML as `data:` URIs; the repository holds no image files. Add new images the same way. A reference to an image file will 404 on the live site.
+- Any new file or folder that is not part of the website must be added to `.assetsignore`, or it is published.
+- Clickable controls on the forms must be `<button>` elements that expose their state with `aria-checked` or `aria-pressed`, not clickable `<div>`s, so they work by keyboard.
+- Do not change anything in Cloudflare without asking the owner first. Cloud sessions can reach `djvelvetgrrl.com` and `www.djvelvetgrrl.com` to check the live site. There is no Cloudflare API access unless the owner adds a read-only token as a network secret.
+- Cloudflare injects its Web Analytics script into every page; it is not in this repository.
 - Pages load Google Fonts and the TIDAL embed from external hosts. Add no other external scripts, fonts, or trackers without asking.
 - Form fields collect client names, contact details, and event details. Keep real submissions, screenshots of the Sheet, and personal data out of commits, fixtures, and prompts; use invented values.
