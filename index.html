@@ -163,6 +163,9 @@
   .stat b{display:block;font-family:"Archivo Black",sans-serif;color:var(--azure-oncard);font-size:30px;}
   .corp .kicker{color:var(--azure-oncard);}
   .stat span{color:var(--ink-muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em;}
+  .corp-list{list-style:none;margin:0 0 22px;display:grid;gap:8px;max-width:62ch;}
+  .corp-list li{color:var(--ink);font-size:14.5px;padding-left:20px;position:relative;}
+  .corp-list li::before{content:"";position:absolute;left:0;top:.55em;width:8px;height:8px;border-radius:50%;background:var(--azure-oncard);}
   .terms-note{color:var(--ink-muted);font-size:14px;max-width:62ch;margin:-8px 0 26px;}
 
   /* Gallery */
@@ -215,6 +218,7 @@
     <span>DJ Velvet Grrl</span>
   </div>
   <div class="navlinks-desktop" style="gap:22px;align-items:center;">
+    <a class="navlink" href="#corporate">Corporate</a>
     <a class="navlink" href="#services">Services</a>
     <a class="navlink" href="#about">About</a>
     <a class="navlink" href="#gallery">Gallery</a>
@@ -233,7 +237,7 @@
     <p class="lede">DJ Velvet Grrl reads the crowd and blends the mix in real time, from the first guest through the last song, so nothing drags and nothing feels canned. Corporate events, fundraisers, milestones, and celebrations of every kind.</p>
     <div class="cta-row">
       <a class="btn-primary" href="#contact">Press Play — Get a Quote</a>
-      <a class="btn-primary" href="#services">See services</a>
+      <a class="btn-primary" href="#corporate">Corporate Planners</a>
     </div>
   </div>
 </section>
@@ -340,7 +344,7 @@
   </div>
 </section>
 
-<section>
+<section id="corporate">
   <div class="section-inner corp">
     <div class="kicker">For planners &amp; office managers</div>
     <h2>Level up your next corporate event.</h2>
@@ -348,8 +352,13 @@
     <div class="stat-row">
       <div class="stat"><b>Net 30</b><span>Invoice terms</span></div>
       <div class="stat"><b>$1M</b><span>Liability coverage</span></div>
-      <div class="stat"><b>1 pt</b><span>Point of contact</span></div>
+      <div class="stat"><b>1 contact</b><span>From booking to last song</span></div>
     </div>
+    <ul class="corp-list">
+      <li>Background music kept at conversation level for networking, and a dance floor when it's time</li>
+      <li>MC for welcomes, awards and raffle draws</li>
+      <li>Photo booth add-on for team photos</li>
+    </ul>
     <p class="terms-note">Payment is due on the event day. Corporate and government clients can request Net 30 invoicing with a purchase order. A retainer secures your date for every booking.</p>
     <a class="btn-primary" href="#contact">Request a corporate quote</a>
   </div>
