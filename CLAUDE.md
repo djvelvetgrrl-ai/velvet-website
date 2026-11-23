@@ -147,5 +147,6 @@ Delegate only when the work is independent and worth the extra cost. Do not have
 - Submitting either form against the live endpoint adds a real row to the Sheet and sends a real email. Never submit test data to it without asking first.
 - The inquiry form in `index.html` also carries a `mailto:` action as its fallback.
 - The site is published automatically through Cloudflare when changes reach `main` (stated by the owner; nothing else in the repository documents it). Treat a merge to `main` as a live deploy.
+- Cloudflare account: reading is fine. Before anything that creates, changes, or deletes something in Cloudflare, tell the owner exactly what you will do, what happens if they say yes, and what happens if they say no, then wait for their explicit yes. Do only what was discussed.
 - Pages load Google Fonts and the TIDAL embed from external hosts. Add no other external scripts, fonts, or trackers without asking.
 - Form fields collect client names, contact details, and event details. Keep real submissions, screenshots of the Sheet, and personal data out of commits, fixtures, and prompts; use invented values.
